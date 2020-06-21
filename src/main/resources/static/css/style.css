@@ -9826,6 +9826,10 @@ a.text-dark:focus, a.text-dark:hover {
   }
 }
 /*# sourceMappingURL=bootstrap.min.css.map */
+.right {
+  text-align: right;
+}
+
 .table {
   text-align: center;
 }
@@ -9842,6 +9846,14 @@ a.text-dark:focus, a.text-dark:hover {
 
 .popup-form {
   width: 500px;
+}
+
+.form .image {
+  padding: 30px;
+}
+.form .image img {
+  display: block;
+  margin: 20px 0;
 }
 
 /*# sourceMappingURL=style.css.map */

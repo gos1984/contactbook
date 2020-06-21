@@ -1,6 +1,10 @@
 @import 'jquery.fancybox.min';
 @import 'bootstrap.min';
 
+.right {
+  text-align: right;
+}
+
 .table {
   text-align: center;
   th, td {
@@ -17,4 +21,14 @@
 
 .popup-form {
   width: 500px;
+}
+
+.form {
+  .image {
+    padding: 30px;
+    img {
+      display: block;
+      margin: 20px 0;
+    }
+  }
 }

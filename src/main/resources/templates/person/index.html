@@ -31,7 +31,8 @@
                         <td th:text="${person.lastName}" data-person="lastName"></td>
                         <td th:text="${person.phone}" data-person="phone"></td>
                         <td th:text="${person.email}" data-person="email"></td>
-                        <td>
+                        <td class="right">
+                            <a th:href="${'/person/edit/' + person.id}" class="btn btn-info person-view">view</a>
                             <a href="#detail-person" class="btn btn-warning fancybox person-edit">edit</a>
                             <a href="javascript:void(null)" th:data-id="${person.id}" class="btn btn-danger person-delete">delete</a>
                         </td>
@@ -39,15 +40,15 @@
                     </tbody>
                     <tfoot>
                     <tr>
-<!--                        <td colspan="6">-->
-<!--                            <nav aria-label="Page navigation example">-->
-<!--                                <ul class="pagination">-->
-<!--                                    <li class="page-item"  th:each="i : ${persons.totalPages}">-->
-<!--                                        <a class="page-link" th:href="${'?page=' + i}">1</a>-->
+                        <td colspan="6">
+                            <nav aria-label="Page navigation example">
+                                <ul class="pagination">
+<!--                                    <li class="page-item"  th:each="i : ${#numbers.sequence(1, persons.totalPages - 1)}">-->
+<!--                                        <a class="page-link" th:href="${'?page=' + i}" th:text="${i}"></a>-->
 <!--                                    </li>-->
-<!--                                </ul>-->
-<!--                            </nav>-->
-<!--                        </td>-->
+                                </ul>
+                            </nav>
+                        </td>
                     </tr>
                     </tfoot>
                 </table>
