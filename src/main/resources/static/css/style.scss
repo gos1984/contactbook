@@ -1,0 +1,20 @@
+@import 'jquery.fancybox.min';
+@import 'bootstrap.min';
+
+.table {
+  text-align: center;
+  th, td {
+    vertical-align: middle;
+    img {
+      width: 70px;
+    }
+  }
+}
+
+.popup {
+  display: none;
+}
+
+.popup-form {
+  width: 500px;
+}

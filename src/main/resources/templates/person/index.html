@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<th:block th:replace="fragments/header :: home"></th:block>
+<section id="section">
+    <div class="container">
+        <div class="row no-gutters">
+            <div class="col-12">
+                <table class="table">
+                    <thead class="thead-dark">
+                    <tr>
+                        <th><a href="?sort=id">id</a></th>
+                        <th><a href="?sort=avatar">avatar</a></th>
+                        <th><a href="?sort=firstName">first name</a></th>
+                        <th><a href="?sort=lastName">last name</a></th>
+                        <th><a href="?sort=phone">phone</a></th>
+                        <th><a href="?sort=email">email</a></th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="person : ${persons}">
+                        <td th:text="${person.id}" data-person="id"></td>
+                        <td data-person="avatar"><img th:src="${person.avatar}"></td>
+                        <td th:text="${person.firstName}" data-person="firstName"></td>
+                        <td th:text="${person.lastName}" data-person="lastName"></td>
+                        <td th:text="${person.phone}" data-person="phone"></td>
+                        <td th:text="${person.email}" data-person="email"></td>
+                        <td>
+                            <a href="#detail-person" class="btn btn-warning fancybox person-edit">edit</a>
+                            <a href="javascript:void(null)" th:data-id="${person.id}" class="btn btn-danger person-delete">delete</a>
+                        </td>
+                    </tr>
+                    </tbody>
+                    <tfoot>
+                    <tr>
+<!--                        <td colspan="6">-->
+<!--                            <nav aria-label="Page navigation example">-->
+<!--                                <ul class="pagination">-->
+<!--                                    <li class="page-item"  th:each="i : ${persons.totalPages}">-->
+<!--                                        <a class="page-link" th:href="${'?page=' + i}">1</a>-->
+<!--                                    </li>-->
+<!--                                </ul>-->
+<!--                            </nav>-->
+<!--                        </td>-->
+                    </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>
+<div class="popup">
+    <form id="detail-person" class="popup-form" action="javascript:void(null);" onsubmit="person.edit('#detail-person')">
+        <div class="form-group">
+            <label for="first-name">First name</label>
+            <input type="text" class="form-control" id="first-name" name="firstName">
+        </div>
+        <div class="form-group">
+            <label for="last-name">Last name</label>
+            <input type="text" class="form-control" id="last-name" name="lastName">
+        </div>
+        <div class="form-group">
+            <label for="phone">Phone</label>
+            <input type="tel" class="form-control" id="phone" name="phone">
+        </div>
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" class="form-control" id="email" name="email">
+        </div>
+        <input type="hidden" name="id">
+        <button class="btn btn-primary mb-2">Edit</button>
+    </form>
+</div>
+<th:block th:replace="fragments/footer :: home"></th:block>
+</body>
+</html>
