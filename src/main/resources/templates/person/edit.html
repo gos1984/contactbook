@@ -1,17 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-    <link rel="stylesheet" href="/css/style.css">
-</head>
-<body>
-<th:block th:replace="fragments/header :: home"></th:block>
+<th:block th:replace="fragments/head"></th:block>
+<th:block th:replace="fragments/header :: page"></th:block>
+
 <section id="section">
-    <div class="row no-gutters justify-content-center align-items-center">
-        <div class="col-8">
+    <div class="container">
             <form action="/person/edit" method="POST" class="form" enctype="multipart/form-data">
-                <div class="row">
+                <div class="row justify-content-center align-items-center">
                     <div class="col-6">
                         <div class="image">
                             <img th:src="${person.avatar}">
@@ -40,7 +33,6 @@
                     </div>
                 </div>
             </form>
-        </div>
     </div>
 </section>
 <th:block th:replace="fragments/footer :: home"></th:block>

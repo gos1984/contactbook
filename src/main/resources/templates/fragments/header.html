@@ -1,10 +1,45 @@
 <th:block th:fragment="home">
     <header id="header">
         <div class="container">
+            <div class="row justify-content-between">
+                <div class="col-md-4">
+                    <a href="/" class="logo">ContactBook</a>
+                </div>
+                <div class="col-md-6">
+                    <form class="form-inline justify-content-end">
+                        <div class="form-group mx-sm-3">
+                            <input type="text" class="form-control" name="search" th:value="${param.search}">
+                        </div>
+                        <div class="form-group mx-sm-3">
+                            <select name="theme" class="form-control">
+                                <option value="firstName">First name</option>
+                                <option value="lastName">Last name</option>
+                                <option value="phone">Phone</option>
+                                <option value="email">Email</option>
+                            </select>
+                        </div>
+                        <div class="form-group mx-sm-3">
+                            <button class="btn btn-primary">Search</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-md-4">
+                </div>
+            </div>
+        </div>
+    </header>
+</th:block>
+<th:block th:fragment="page">
+    <header id="header">
+        <div class="container">
             <div class="row no-gutters">
+                <div class="col-md-4">
+                    <a href="/" class="logo">ContactBook</a>
+                </div>
                 <div class="col-md-4"></div>
-                <div class="col-md-4"></div>
-                <div class="col-md-4"></div>
+                <div class="col-md-4 right">
+                    <a href="#" class="button_back btn btn-primary">Назад</a>
+                </div>
             </div>
         </div>
     </header>

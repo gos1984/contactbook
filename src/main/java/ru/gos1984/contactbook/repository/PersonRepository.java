@@ -8,4 +8,8 @@ import ru.gos1984.contactbook.entity.Person;
 public interface PersonRepository extends PagingAndSortingRepository<Person, Long> {
     Page<Person> findAll(Pageable pageble);
     Person findPersonById(Long id);
+    Page<Person> findAllByFirstNameIgnoreCaseContains(String firstName, Pageable pageble);
+    Page<Person> findAllByLastNameIgnoreCaseContains(String firstName, Pageable pageble);
+    Page<Person> findAllByPhoneIgnoreCaseContains(String firstName, Pageable pageble);
+    Page<Person> findAllByEmailIgnoreCaseContains(String firstName, Pageable pageble);
 }

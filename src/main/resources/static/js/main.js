@@ -11,7 +11,15 @@ $(document).ready(function() {
     $('.person-delete').click(function() {
         person.delete($(this).attr('data-id'));
     });
+
+    $('.button_back').click(function() {
+        history.back();
+    });
+
+
+
 });
+
 
 var person = {
     edit: function(form) {

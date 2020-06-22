@@ -9826,12 +9826,36 @@ a.text-dark:focus, a.text-dark:hover {
   }
 }
 /*# sourceMappingURL=bootstrap.min.css.map */
+a {
+  transition: all 0.3s ease;
+}
+a:hover {
+  text-decoration: none;
+}
+
 .right {
   text-align: right;
 }
 
 .table {
   text-align: center;
+}
+.table th a {
+  color: #ffffff;
+}
+.table th .order {
+  margin: 4px 5px 0;
+}
+.table th .order a {
+  display: block;
+  width: 10px;
+  height: 10px;
+}
+.table th .order a.up {
+  background: url("/img/up.svg");
+}
+.table th .order a.down {
+  background: url("/img/down.svg");
 }
 .table th, .table td {
   vertical-align: middle;
@@ -9848,12 +9872,19 @@ a.text-dark:focus, a.text-dark:hover {
   width: 500px;
 }
 
-.form .image {
-  padding: 30px;
-}
 .form .image img {
   display: block;
   margin: 20px 0;
+  max-width: 200px;
+}
+
+#header {
+  padding: 40px 0;
+}
+#header .logo {
+  font-family: "Tangerine", serif;
+  font-size: 48px;
+  line-height: 0;
 }
 
 /*# sourceMappingURL=style.css.map */

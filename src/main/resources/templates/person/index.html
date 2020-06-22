@@ -1,11 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-    <link rel="stylesheet" href="/css/style.css">
-</head>
-<body>
+<th:block th:replace="fragments/head"></th:block>
 <th:block th:replace="fragments/header :: home"></th:block>
 <section id="section">
     <div class="container">
@@ -14,12 +7,60 @@
                 <table class="table">
                     <thead class="thead-dark">
                     <tr>
-                        <th><a href="?sort=id">id</a></th>
-                        <th><a href="?sort=avatar">avatar</a></th>
-                        <th><a href="?sort=firstName">first name</a></th>
-                        <th><a href="?sort=lastName">last name</a></th>
-                        <th><a href="?sort=phone">phone</a></th>
-                        <th><a href="?sort=email">email</a></th>
+                        <th>
+                            <div class="d-flex justify-content-center align-items-center">
+                                <a href="?sort=id" data-order="id">id</a>
+                                <div class="order">
+                                    <a href="?sort=id&order=asc" class="up"></a>
+                                    <a href="?sort=id&order=desc" class="down"></a>
+                                </div>
+                            </div>
+                        </th>
+                        <th>
+                            <div class="d-flex justify-content-center align-items-center">
+                                <a href="?sort=avatar" data-order="avatar">avatar</a>
+                                <div class="order">
+                                    <a href="?sort=avatar&order=asc" class="up"></a>
+                                    <a href="?sort=avatar&order=desc" class="down"></a>
+                                </div>
+                            </div>
+                        </th>
+                        <th>
+                            <div class="d-flex justify-content-center align-items-center">
+                                <a href="?sort=firstName" data-order="firstName">first name</a>
+                                <div class="order">
+                                    <a href="?sort=firstName&order=asc" class="up"></a>
+                                    <a href="?sort=firstName&order=desc" class="down"></a>
+                                </div>
+                            </div>
+                        </th>
+                        <th>
+                            <div class="d-flex justify-content-center align-items-center">
+                                <a href="?sort=lastName" data-order="lastName">last name</a>
+                                <div class="order">
+                                    <a href="?sort=lastName&order=asc" class="up"></a>
+                                    <a href="?sort=lastName&order=desc" class="down"></a>
+                                </div>
+                            </div>
+                        </th>
+                        <th>
+                            <div class="d-flex justify-content-center align-items-center">
+                                <a href="?sort=phone" data-order="phone">phone</a>
+                                <div class="order">
+                                    <a href="?sort=phone&order=asc" class="up"></a>
+                                    <a href="?sort=phone&order=desc" class="down"></a>
+                                </div>
+                            </div>
+                        </th>
+                        <th>
+                            <div class="d-flex justify-content-center align-items-center">
+                                <a href="?sort=email" data-order="email">email</a>
+                                <div class="order">
+                                    <a href="?sort=email&order=asc" class="up"></a>
+                                    <a href="?sort=email&order=desc" class="down"></a>
+                                </div>
+                            </div>
+                        </th>
                         <th></th>
                     </tr>
                     </thead>
@@ -32,9 +73,10 @@
                         <td th:text="${person.phone}" data-person="phone"></td>
                         <td th:text="${person.email}" data-person="email"></td>
                         <td class="right">
-                            <a th:href="${'/person/edit/' + person.id}" class="btn btn-info person-view">view</a>
+                            <a th:href="${'/person/edit/' + person.id}" class="btn btn-info person-view">detail</a>
                             <a href="#detail-person" class="btn btn-warning fancybox person-edit">edit</a>
-                            <a href="javascript:void(null)" th:data-id="${person.id}" class="btn btn-danger person-delete">delete</a>
+                            <a href="javascript:void(null)" th:data-id="${person.id}"
+                               class="btn btn-danger person-delete">delete</a>
                         </td>
                     </tr>
                     </tbody>
@@ -42,11 +84,11 @@
                     <tr>
                         <td colspan="6">
                             <nav aria-label="Page navigation example">
-                                <ul class="pagination">
-<!--                                    <li class="page-item"  th:each="i : ${#numbers.sequence(1, persons.totalPages - 1)}">-->
+<!--                                <ul class="pagination">-->
+<!--                                    <li class="page-item" th:each="i : ${#numbers.sequence(1, persons.totalPages - 1)}">-->
 <!--                                        <a class="page-link" th:href="${'?page=' + i}" th:text="${i}"></a>-->
 <!--                                    </li>-->
-                                </ul>
+<!--                                </ul>-->
                             </nav>
                         </td>
                     </tr>
@@ -57,7 +99,8 @@
     </div>
 </section>
 <div class="popup">
-    <form id="detail-person" class="popup-form" action="javascript:void(null);" onsubmit="person.edit('#detail-person')">
+    <form id="detail-person" class="popup-form" action="javascript:void(null);"
+          onsubmit="person.edit('#detail-person')">
         <div class="form-group">
             <label for="first-name">First name</label>
             <input type="text" class="form-control" id="first-name" name="firstName">

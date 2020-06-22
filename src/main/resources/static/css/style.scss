@@ -1,12 +1,39 @@
 @import 'jquery.fancybox.min';
 @import 'bootstrap.min';
 
+
+a {
+  transition: all .3s ease;
+  &:hover {
+    text-decoration: none;
+  }
+}
+
 .right {
   text-align: right;
 }
 
 .table {
   text-align: center;
+  th {
+    a {
+      color: #ffffff;
+    }
+    .order {
+      margin: 4px 5px 0;
+      a {
+        display: block;
+        width: 10px;
+        height: 10px;
+        &.up {
+          background: url("/img/up.svg");
+        }
+        &.down {
+          background: url("/img/down.svg");
+        }
+      }
+    }
+  }
   th, td {
     vertical-align: middle;
     img {
@@ -25,10 +52,22 @@
 
 .form {
   .image {
-    padding: 30px;
     img {
       display: block;
       margin: 20px 0;
+      max-width: 200px;
     }
   }
 }
+
+
+#header {
+  padding: 40px 0;
+  .logo {
+    font-family: 'Tangerine', serif;
+    font-size: 48px;
+    line-height: 0;
+  }
+}
+
+
