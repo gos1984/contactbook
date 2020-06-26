@@ -1,5 +1,6 @@
 package ru.gos1984.contactbook.controller;
 
+import org.apache.tomcat.util.http.fileupload.FileUploadException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
@@ -42,12 +43,12 @@ public class AppController {
                         @RequestParam(value = "search", defaultValue = "") String search,
                         @RequestParam(value = "theme", defaultValue = "") String theme,
                         @RequestParam(value = "sort", defaultValue = "id") String sort) {
-        Pageable pageable = PageRequest.of(page, size,Sort.by(Sort.Direction.fromString(order.equals("desc") ? "desc" : "asc"), sort));
+        Pageable pageable = PageRequest.of(page, size, Sort.by(Sort.Direction.fromString(order.equals("desc") ? "desc" : "asc"), sort));
         Page<Person> persons;
-        if(search.isEmpty() && theme.isEmpty()) {
+        if (search.isEmpty() && theme.isEmpty()) {
             persons = personRepository.findAll(pageable);
         } else {
-            switch(theme) {
+            switch (theme) {
                 case "lastName":
                     persons = personRepository.findAllByLastNameIgnoreCaseContains(search, pageable);
                     break;
@@ -67,34 +68,47 @@ public class AppController {
 
     @GetMapping("/person/edit/{id}")
     public String edit(Model model,
-                        @PathVariable("id") Long id) {
+                       @PathVariable("id") Long id) {
         Person person = personRepository.findPersonById(id);
         model.addAttribute("person", person);
         return "person/edit";
     }
 
-    @PostMapping("/person/edit")
-    public String editPerson(Model model,
+    @PostMapping("/person/edit/full")
+    public String editFullPerson(Model model,
                              @RequestParam Map<String, String> param,
-                             @RequestParam("avatar") MultipartFile avatar) {
+                             @RequestParam(name = "avatar", required = false, defaultValue = "") MultipartFile avatar) {
+        System.out.println(avatar);
         Long id = Long.parseLong(param.get("id"));
         Person person = personRepository.findPersonById(id);
 
-        if(!avatar.isEmpty()) {
-            File file = new File(appSource + avatar.getOriginalFilename());
-            try(FileOutputStream fos = new FileOutputStream(file)) {
-                fos.write(avatar.getBytes());
-                person.setAvatar("/img/" + file.getName());
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+        File file = new File(appSource + avatar.getOriginalFilename());
+        try (FileOutputStream fos = new FileOutputStream(file)) {
+            fos.write(avatar.getBytes());
+            person.setAvatar("/img/" + file.getName());
+        } catch (IOException e) {
+            e.printStackTrace();
         }
+        personRepository.save(changeDataPerson(person,
+                param.get("firstName"),
+                param.get("lastName"),
+                param.get("phone"),
+                param.get("email"))
+        );
+        return "redirect:/person/edit/" + id;
+    }
 
-        person.setFirstName(param.get("firstName"));
-        person.setLastName(param.get("lastName"));
-        person.setPhone(param.get("phone"));
-        person.setEmail(param.get("email"));
-        personRepository.save(person);
+    @PostMapping("/person/edit/part")
+    public String editPartPerson(Model model, @RequestParam Map<String, String> param) {
+        Long id = Long.parseLong(param.get("id"));
+
+        personRepository.save(changeDataPerson(
+                personRepository.findPersonById(id),
+                param.get("firstName"),
+                param.get("lastName"),
+                param.get("phone"),
+                param.get("email"))
+        );
         return "redirect:/person/edit/" + id;
     }
 
@@ -104,5 +118,13 @@ public class AppController {
         Person person = personRepository.findPersonById(id);
         personRepository.delete(person);
         return "redirect:/";
+    }
+
+    private Person changeDataPerson (Person person, String firstName, String lastName, String phone, String email) {
+        person.setFirstName(firstName);
+        person.setLastName(lastName);
+        person.setPhone(phone);
+        person.setEmail(email);
+        return person;
     }
 }
