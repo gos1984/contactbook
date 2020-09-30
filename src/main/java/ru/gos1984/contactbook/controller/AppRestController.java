@@ -47,6 +47,11 @@ public class AppRestController {
         return companyRepository.findAll(PageRequest.of(page, size, Sort.by(Sort.Direction.fromString(order.equals("desc") ? "desc" : "asc"), sort)));
     }
 
+    @GetMapping("/company/{id}")
+    public Company companies(@PathVariable("id") Long id) {
+        return companyRepository.findCompanyById(id);
+    }
+
     @GetMapping("/persons")
     public Page<Person> persons(
             @RequestParam(value = "page", defaultValue = "0") int page,
@@ -55,5 +60,10 @@ public class AppRestController {
             @RequestParam(value = "sort", defaultValue = "id") String sort
     ) {
         return personRepository.findAll(PageRequest.of(page, size, Sort.by(Sort.Direction.fromString(order.equals("desc") ? "desc" : "asc"), sort)));
+    }
+
+    @GetMapping("/person/{id}")
+    public Person person(@PathVariable("id") Long id) {
+        return personRepository.findPersonById(id);
     }
 }

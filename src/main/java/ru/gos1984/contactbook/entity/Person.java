@@ -3,11 +3,13 @@ package ru.gos1984.contactbook.entity;
 import com.fasterxml.jackson.annotation.*;
 import lombok.Data;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
 
 @Entity(name = "person")
+@NoArgsConstructor
 @Getter
 @Setter
 public class Person {
@@ -35,8 +37,6 @@ public class Person {
     @JoinColumn(name = "company_id", referencedColumnName = "id")
     @JsonBackReference
     private Company company;
-
-    public Person() {}
 
     public Person(String firstName, String lastName, String phone, String email, String avatar) {
         this.firstName = firstName;

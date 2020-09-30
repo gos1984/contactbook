@@ -1,8 +1,8 @@
 package ru.gos1984.contactbook.entity;
 
 import com.fasterxml.jackson.annotation.*;
-import lombok.Data;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity(name = "company")
+@NoArgsConstructor
 @Getter
 @Setter
 public class Company {
@@ -31,9 +32,6 @@ public class Company {
     @OneToMany(mappedBy = "company", cascade = CascadeType.ALL)
     @JsonManagedReference
     private List<Person> persons;
-
-    public Company() {
-    }
 
     public Company(String name, String logo, String industry, String address, String phone) {
         this.name = name;

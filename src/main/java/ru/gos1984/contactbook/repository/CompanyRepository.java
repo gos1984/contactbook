@@ -6,4 +6,5 @@ import ru.gos1984.contactbook.entity.Company;
 
 public interface CompanyRepository extends JpaRepository<Company, Long> {
 
+    Company findCompanyById(Long id);
 }
