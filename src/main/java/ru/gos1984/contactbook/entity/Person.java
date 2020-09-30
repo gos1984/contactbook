@@ -1,5 +1,6 @@
 package ru.gos1984.contactbook.entity;
 
+import com.fasterxml.jackson.annotation.*;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
@@ -7,7 +8,8 @@ import lombok.Setter;
 import javax.persistence.*;
 
 @Entity(name = "person")
-@Data
+@Getter
+@Setter
 public class Person {
 
     @Id
@@ -16,29 +18,23 @@ public class Person {
     private Long id;
 
     @Column(name = "first_name")
-    @Getter
-    @Setter
     private String firstName;
 
     @Column(name = "last_name")
-    @Getter
-    @Setter
     private String lastName;
 
     @Column(name = "phone")
-    @Getter
-    @Setter
     private String phone;
 
     @Column(name = "email")
-    @Getter
-    @Setter
     private String email;
 
     @Column(name = "avatar")
-    @Getter
-    @Setter
     private String avatar;
+    @ManyToOne(fetch=FetchType.LAZY)
+    @JoinColumn(name = "company_id", referencedColumnName = "id")
+    @JsonBackReference
+    private Company company;
 
     public Person() {}
 
