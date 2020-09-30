@@ -25,7 +25,7 @@ var person = {
     edit: function(form) {
         var msg = $(form).serialize();
         $.post({
-            url: '/person/edit',
+            url: '/person/edit/part',
             data: msg,
             success: function(data) {
                 $.fancybox.close();
